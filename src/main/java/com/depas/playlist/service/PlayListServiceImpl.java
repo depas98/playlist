@@ -2,20 +2,27 @@ package com.depas.playlist.service;
 
 import com.depas.playlist.PlayList;
 import com.depas.playlist.Song;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.naming.NameNotFoundException;
+import java.util.*;
 
 @Service
 public class PlayListServiceImpl implements PlayListService {
 
+    private static final Logger logger = LoggerFactory.getLogger(PlayListServiceImpl.class);
+
+    ApplicationContext applicationContext;
+
     List<PlayList> playLists = new ArrayList<>();
 
     public PlayListServiceImpl(){
-        System.out.printf("instantiating playlistservice");
+
+        logger.debug("instantiating playlistservice");
+
 
         // create some default playlist
         String playlist1 = "70s";
@@ -51,7 +58,9 @@ public class PlayListServiceImpl implements PlayListService {
                 .addSongs(songs)
                 .build();
 
+        logger.debug("add playlist: " + playList1);
         playLists.add(playList1);
+        logger.debug("add playlist: " + playList2);
         playLists.add(playList2);
     }
 
@@ -59,4 +68,12 @@ public class PlayListServiceImpl implements PlayListService {
     public List<PlayList> getPlayLists() {
         return playLists;
     }
+
+    @Override
+    public Optional<PlayList> getPlayList(String playListName) {
+        return playLists.stream()
+                .filter(p -> p.getName().equals(playListName))
+                .findAny();
+    }
+
 }

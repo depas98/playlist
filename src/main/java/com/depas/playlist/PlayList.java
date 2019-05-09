@@ -46,7 +46,6 @@ public class PlayList {
         }
 
         public PlayListBuilder addSongs(final Set<Song> songsIn){
-            System.out.println(songsIn);
             boolean worked = this.songs.addAll(songsIn);
             songsIn.forEach(s -> this.songs.add(s));
             return this;
