@@ -2,18 +2,17 @@ package com.depas.playlist.service;
 
 import com.depas.playlist.PlayList;
 import com.depas.playlist.Song;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NameNotFoundException;
 import java.util.*;
 
 @Service
 public class PlayListServiceImpl implements PlayListService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlayListServiceImpl.class);
+    private final Log logger = LogFactory.getLog(this.getClass());
 
     ApplicationContext applicationContext;
 
